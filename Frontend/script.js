@@ -12,7 +12,7 @@
 
   // 📌 ดึง table id จาก URL เช่น ?table=3
   const params = new URLSearchParams(window.location.search);
-  const tableId = params.get("table") || "1"; // ถ้าไม่มี → โต๊ะ 1
+  const tableId = params.get("table") || "13"; // ถ้าไม่มี → โต๊ะ 13
   const tableName = `โต๊ะ ${tableId}`;
 
   const logData = {
@@ -23,7 +23,7 @@
 
   // ✅ ส่ง log ไป backend
   try {
-    await fetch("http://localhost:5000/log", {
+    await fetch("http://127.0.0.1:5000/log", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(logData)
@@ -34,7 +34,7 @@
 
   // ✅ ขอ URL redirect จาก backend
   try {
-    const res = await fetch(`http://localhost:5000/get-url/${tableId}`);
+    const res = await fetch(`http://127.0.0.1:5000/get-url/${tableId}`);
     const result = await res.json();
 
     if (result.url) {
