@@ -9,22 +9,43 @@
   }
 
   const deviceId = getDeviceId();
-  const table = "โต๊ะ 1";
+
+  // 📌 ดึง table id จาก URL เช่น ?table=3
+  const params = new URLSearchParams(window.location.search);
+  const tableId = params.get("table") || "1"; // ถ้าไม่มี → โต๊ะ 1
+  const tableName = `โต๊ะ ${tableId}`;
+
   const logData = {
     device_id: deviceId,
-    table: table,
+    table: tableName,
     timestamp: new Date().toISOString()
   };
 
-  // เปลี่ยน URL ด้านล่างให้ตรงกับ backend ที่จะทำ
-  await fetch("http://localhost:5000/log", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(logData)
-  });
+  // ✅ ส่ง log ไป backend
+  try {
+    await fetch("http://localhost:5000/log", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(logData)
+    });
+  } catch (err) {
+    console.warn("❌ ไม่สามารถส่ง log ได้:", err);
+  }
 
-  // เปลี่ยนเป็น Wongnai URL จริง
-  setTimeout(() => {
-    window.location.href = "https://mobile-order.wongnai.com/...";
-  }, 2000);
+  // ✅ ขอ URL redirect จาก backend
+  try {
+    const res = await fetch(`http://localhost:5000/get-url/${tableId}`);
+    const result = await res.json();
+
+    if (result.url) {
+      document.body.innerHTML = `<h2>✅ กำลังพาไปยังเมนูของ ${tableName}...</h2>`;
+      setTimeout(() => {
+        window.location.href = result.url;
+      }, 2000);
+    } else {
+      document.body.innerHTML = `<h2>❌ ไม่พบ URL สำหรับ ${tableName}</h2>`;
+    }
+  } catch (err) {
+    document.body.innerHTML = `<h2>❌ เกิดข้อผิดพลาดขณะโหลด URL: ${err.message}</h2>`;
+  }
 })();

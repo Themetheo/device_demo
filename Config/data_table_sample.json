@@ -1,0 +1,14 @@
+[
+  {
+    "table_name": "โต๊ะ 1",
+    "redirect_url": "https://mobile-order.wongnai.com/static-qr/branch/4202b70c-a929-48db-a6fc-bc5f9f1c8316/table/11111111-1111-1111-1111-111111111111"
+  },
+  {
+    "table_name": "โต๊ะ 2",
+    "redirect_url": "https://mobile-order.wongnai.com/static-qr/branch/4202b70c-a929-48db-a6fc-bc5f9f1c8316/table/22222222-2222-2222-2222-222222222222"
+  },
+  {
+    "table_name": "โต๊ะ 3",
+    "redirect_url": "https://mobile-order.wongnai.com/static-qr/branch/4202b70c-a929-48db-a6fc-bc5f9f1c8316/table/33333333-3333-3333-3333-333333333333"
+  }
+]
