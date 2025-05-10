@@ -1,0 +1,29 @@
+# 🐍 Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 🧪 Virtual environment
+.venv/
+
+# ⚙️ VS Code config (optional)
+.vscode/
+*.code-workspace
+
+# 🧬 Environment files
+.env
+.env.*
+!.env.example
+
+# 🔐 Config ที่ไม่ควรเผยแพร่
+Config/data_table.json
+Config/data_table_private.json
+Config/config_private.json
+
+# 💻 System / OS
+.DS_Store
+Thumbs.db
+
+# 🧪 Testing logs (optional)
+*.log
