@@ -1,17 +1,27 @@
 from flask import Flask, request, jsonify, redirect
+from flask_cors import CORS
 from datetime import datetime
 from Config.loader import load_table_url
 
 app = Flask(__name__)
+CORS(app)  # ✅ เปิด CORS ให้ frontend fetch ได้
+
 logs = []
 
 @app.route("/log", methods=["POST"])
 def log_device():
-    data = request.json
-    data["server_time"] = datetime.now().isoformat()
-    logs.append(data)
-    print(f"📥 LOG: {data}")
-    return jsonify({"status": "ok"})
+    try:
+        data = request.get_json(force=True)
+        if not data:
+            return jsonify({"error": "Invalid JSON"}), 400
+
+        data["server_time"] = datetime.now().isoformat()
+        logs.append(data)
+        print(f"📥 LOG: {data}")
+        return jsonify({"status": "ok"})
+
+    except Exception as e:
+        return jsonify({"error": f"Server error: {str(e)}"}), 500
 
 @app.route("/get-url/<table_id>")
 def get_url(table_id):
