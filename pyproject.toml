@@ -7,5 +7,10 @@ requires-python = ">=3.8"
 dependencies = [
     "flask",
     "python-dotenv",
-    "pandas"
+    "pandas",
+    "gspread",
+    "oauth2client",
+    "requests",
+    "flask-cors",
+    "schedule"
 ]

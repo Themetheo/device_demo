@@ -20,6 +20,7 @@ __pycache__/
 Config/data_table.json
 Config/data_table_private.json
 Config/config_private.json
+Config/data_table_sample.json
 
 # 💻 System / OS
 .DS_Store
