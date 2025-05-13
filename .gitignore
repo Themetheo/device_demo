@@ -28,3 +28,6 @@ Thumbs.db
 
 # 🧪 Testing logs (optional)
 *.log
+
+# Ignore Google credential
+Config/credentials.json
